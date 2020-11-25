@@ -19,4 +19,4 @@ Compute the rate for table2, and table4a+table4b and perform the four operationa
 
 ## Final
 
-Create a n
+Consider the following blood pressure dataset (IC_BP_v2.csv). Perform the following operations: Convert BP alerts to BP status,	Define Hypo-1 & Normal as Controlled blood pressure; Hypo-2, HTN1, HTN2 & HTN3 as Uncontrolled blood pressure: Controlled & Uncontrolled blood pressure as 1 or 0 (Dichotomous Outcomes), merge this table with demographics (SQL table) to obtain their enrollment dates, create a 12-week interval of averaged scores of each customer, compare the scores from baseline (first week) to follow-up scores (12 weeks), and how many customers were brought from uncontrolled regime to controlled regime after 12 weeks of intervention? 2)	Merge the tables Demographics, Conditions and TextMessages. Obtain the final dataset such that we have 1 Row per ID by choosing on the latest date when the text was sent (if sent on multiple days) (do this in both R and SQL). Lastly, set up a GitHub repo with all your code in their proper subdirectories with project task descriptions. 
