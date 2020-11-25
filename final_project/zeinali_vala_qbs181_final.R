@@ -56,16 +56,28 @@ ans[sample(nrow(ans), 10), ]
 #1.e)
 
 #1 week value
-ans1 <- sqldf("SELECT contactid, avg(SystolicValue) as twelve_week_average_systolic, avg(Diastolicvalue) as twelve_week_average_diastolic,max(tri_enrollmentcompletedate)
+ans1 <- sqldf("SELECT contactid, avg(SystolicValue) as one_week_average_systolic, avg(Diastolicvalue) as one_week_average_diastolic, min(tri_enrollmentcompletedate)
               FROM df_join
               GROUP BY contactid")
 ans1[sample(nrow(ans1), 10), ]
 
 #12 week value
-ans12 <- sqldf("SELECT contactid, avg(SystolicValue) as twelve_week_average_systolic, avg(Diastolicvalue) as twelve_week_average_diastolic,max(tri_enrollmentcompletedate)
+ans12 <- sqldf("SELECT contactid, avg(SystolicValue) as twelve_week_average_systolic, avg(Diastolicvalue) as twelve_week_average_diastolic, max(tri_enrollmentcompletedate)
               FROM df_join
               GROUP BY contactid")
 ans12[sample(nrow(ans12), 10), ]
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 #2 
