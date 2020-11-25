@@ -15,7 +15,7 @@ Supplied messy data set.  List the data-related issues you see in this data set.
 
 ## Project 3
 
-Compute the rate for table2, and table4a+table4b and perform the four operationa. Extract the number of TB cases per country per year. Extract the matching population per country per year. Divide cases by population, and multiply by 10,000. Store back in appropriate place. Answer why a piece if code fails to work. Use the flights dataset in the nycflights13 library and answer the following. How does the distribution of flights times within a day change over the course of the year, Compare dep_time,sched_dep_time, and dep_delay. Are they consistent. Explain your findings, and Confirm my hypothesis that the early departures of flights in minutes 20-30 and 50-60 are caused by scheduled flights that leave early. Hint:create a binary variable that tells whether or not a flight was delayed. 
+Compute the rate for table2, and table4a+table4b and perform the four operations. Extract the number of TB cases per country per year. Extract the matching population per country per year. Divide cases by population, and multiply by 10,000. Store back in appropriate place. Answer why a piece if code fails to work. Use the flights dataset in the nycflights13 library and answer the following. How does the distribution of flights times within a day change over the course of the year, Compare dep_time,sched_dep_time, and dep_delay. Are they consistent. Explain your findings, and Confirm my hypothesis that the early departures of flights in minutes 20-30 and 50-60 are caused by scheduled flights that leave early. Hint:create a binary variable that tells whether or not a flight was delayed. 
 
 ## Final
 
