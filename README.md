@@ -11,7 +11,7 @@ Create a new column “Enrollment group” in the table Phonecall_encounter base
 
 ## Midterm
 
-Create a n
+Supplied messy data set.  List the data-related issues you see in this data set. How will you address each data-related issue? Give justification for why you chose a particular way to address each issue. For example, if you decide to address missing values by removing rows or filling empty data cells, justify your decision or if you want to create a PHI field like year of Birth. Clean the data by addressing each point listed in 1. Verify that whether the counts of each code or value for various variables are correct as mentioned in the website.
 
 ## Project 3
 
