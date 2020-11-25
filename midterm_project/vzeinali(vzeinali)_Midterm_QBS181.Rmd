@@ -1,0 +1,120 @@
+---
+title: "vzeinali(vzeinali)_Midterm_QBS181"
+author: "Vala Zeinali"
+date: "10/30/2020"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_knit$set(root.dir = "/Users/valazeinali/Desktop/Dartmouth/Fall 2020/Data Wrangle") #set the correct folder here so that it can be accessed in all your code chunks
+knitr::opts_chunk$set(echo = TRUE)
+
+r <- getOption("repos")
+r["CRAN"] <- "http://cran.cnr.berkeley.edu/"
+options(repos = r)
+```
+
+## Solutions
+
+
+\section{Loading in Data}
+
+Let's start by loading in our data set. We will use sasxport to load in the df.
+```{r data}
+library(Hmisc)
+library(sqldf)
+
+df <- sasxport.get("/Users/valazeinali/Desktop/Dartmouth/Fall 2020/Data Wrangle/DIQ_I.XPT")
+```
+
+## Summary of raw data
+
+To get a feel for what we are working with
+```{r summary}
+summary(df)
+```
+
+## Datatype Conversion
+
+From our summary we notice that there are descriptive statistics on these columns. Unfortunately, we want these columns to be character type, for they are labels and are categorical. Some variables are quantitative in nature, however, are actually modeled qualitatively in this study.
+
+```{r convert}
+temp<- sapply(df, as.character) # making data qualitative "We dont wants integers"
+df <- data.frame(temp)
+head(df)
+```
+
+## Data Selection with SQL
+
+I want to drop columns that have 99.5% missing values
+```{r R part1}
+print("A column will be dropped if it has less than 30 values")
+print(length(df$seqn) - length(df$seqn)*.996866841) # I want atleast 30 values in each column to be able to apply CLT arguements in future ML models if needed
+names <- data.frame(sapply(df, function(x) sum(is.na(x))/length(df$seqn)))
+print(names > .996866841) #true columns will be dropped in SQL (next block)
+```
+
+Now we want to get rid of the unwanted columns.
+```{r sql}
+df1 <- sqldf("SELECT * FROM df ") #making copy of our data to preform data cleaning below
+df = subset(df1, select = -c(diq175r, diq175v, diq175w, diq175x)) #dropping unwanted columns mathmatically identified above
+head(df)
+```
+
+
+## OneHotEncoding for future ML purposes
+
+I am making two data sets, one forcolumns that represent unique questions and the other represents one question with multiple responses.The "factors" table below is set up for feature selection for future ML purposes.
+```{r SQL part2}
+factors <- sqldf("SELECT
+seqn,
+diq175a,
+diq175b,
+diq175c,
+diq175d,
+diq175e,
+diq175f,
+diq175g,
+diq175h,
+diq175i,
+diq175j,
+diq175k,
+diq175l,
+diq175m,
+diq175n,
+diq175o,
+diq175p,
+diq175q,
+diq175s,
+diq175t,
+diq175u FROM df ")
+
+head(factors)
+```
+```{r R part2}
+library(dbplyr)
+#replace all N/A's with zeros
+i <- sapply(factors, is.factor) # Identify all factor variables in your data
+factors[i] <- lapply(factors[i], as.character) # Convert factors to character variables
+factors[is.na(factors)] <- 0 # Replace NA with 0, as shown in Example 1
+factors[i] <- lapply(factors[i], as.factor) # Convert character columns back to factors
+
+#one-hot-encoding
+factors <- factors %>% dplyr::mutate_if(is.character, ~1 * (. != 0)) #replace all values that are not 0 with 1
+factors$seqn <- df$seqn #need to restore the seqn data
+head(factors)
+
+```
+
+#Summary
+
+Now we have two tables, one table has columns that represent unique questions and the other represents one question with multiple responses.The "factors" table is set up for feature selection for future ML purposes.
+```{r R part3}
+head(factors)
+```
+
+```{r R part4}
+head(df)
+```
