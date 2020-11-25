@@ -67,10 +67,20 @@ ans12 <- sqldf("SELECT contactid, avg(SystolicValue) as twelve_week_average_syst
               GROUP BY contactid")
 ans12[sample(nrow(ans12), 10), ]
 
+#1.f)
 
+ans11 <- sqldf("SELECT contactid, avg(SystolicValue) as one_week_average_systolic, avg(Diastolicvalue) as one_week_average_diastolic, min(tri_enrollmentcompletedate),`Binary Group` 
+              FROM df_join
+              GROUP BY contactid")
 
+ans112 <- sqldf("SELECT contactid, avg(SystolicValue) as twelve_week_average_systolic, avg(Diastolicvalue) as twelve_week_average_diastolic, max(tri_enrollmentcompletedate),`Binary Group` 
+              FROM df_join
+              GROUP BY contactid")
+dt11 <- data.table(ans11, key = "contactid")
+dt22 <- data.table(ans112, key = "contactid")
+df_join2 <- dt11[dt22]
 
-
+length(df_join2$contactid)
 
 
 
